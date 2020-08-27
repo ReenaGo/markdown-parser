@@ -8,7 +8,7 @@ Add markdown text to ADDMARKDOWN.md, run index.js file using the command 'node i
 
 ## Limitations
 This implementation will not recognize a line if it begins with an indentation.
-This implmentation is limited to only one a tag per line
+This implmentation is limited to only one 'a' tag per line
 
 Thank you ;)
 
