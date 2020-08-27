@@ -1,0 +1,15 @@
+{
+  "name": "mailchimp",
+  "version": "1.0.0",
+  "description": "markdown to HTML parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Reena Gouldbourne",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
