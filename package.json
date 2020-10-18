@@ -1,5 +1,5 @@
 {
-  "name": "mailchimp",
+  "name": "markdown",
   "version": "1.0.0",
   "description": "markdown to HTML parser",
   "main": "index.js",
