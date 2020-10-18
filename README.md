@@ -11,12 +11,12 @@ This implementation will not recognize a line if it begins with an indentation.
 This implmentation is limited to only one a tag per line
 Parser set up to parse only the below subset of markdown
 
-# Heading 1                          <h1>Heading 1</h1>
-## Heading 2                         <h2>Heading 2</h2>
-...                                  ...                                          
-###### Heading 6                     <h6>Heading 6</h6>
-Unformatted text                     <p>Unformatted text</p>                      
-[Link text](https://www.test.com)    <a href="https://www.test.com">Link text</a>
+# Heading 1                          
+## Heading 2                        
+...                                                                          
+###### Heading 6                    
+Unformatted text                                       
+[Link text](https://www.test.com)   
 
 
 
