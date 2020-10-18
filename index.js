@@ -22,6 +22,10 @@ function spliceLinkTagComponent(array, i, component) {
     return spliceLinkTagComponent(array, i, component)
 }
 
+//Takes in a string, and splits it into an array of characters
+//loops through to find square brackets and parens and saves in link tag components
+//Last for loop makes sure that the last bracket and first parens are next to each other
+//returns an array of arrays ['[', 20],[']',23],['(',24], [')',30]]
 function verifyLinkTag(lines) {
     const linkTagComponents = []
     const charArray = lines.split('')
@@ -35,6 +39,8 @@ function verifyLinkTag(lines) {
             }
         }
     }
+    //Loop through Link tag components and makes sure we have brackets and parens in right order
+    //[]()
     for (let i = 0; i < linkTagComponents.length; i++) {
         if (i === 0) {
             spliceLinkTagComponent(linkTagComponents, i, '[')
@@ -49,10 +55,12 @@ function verifyLinkTag(lines) {
             spliceLinkTagComponent(linkTagComponents, i + 1, ')')
         }
     }
+    //make sure full image tag not []() [](
     const remainder = linkTagComponents.length % 4
     const index = linkTagComponents.length - remainder - 1
     linkTagComponents.splice(index, remainder)
 
+    //invalid if []dh ()
     if (linkTagComponents.length >= 4) {
         for (let i = 1; i < linkTagComponents.length; i + 4) {
             const openBracket = linkTagComponents[i][1]
@@ -70,6 +78,13 @@ function verifyLinkTag(lines) {
     return linkTagComponents
 }
 
+//Takes in LinkTagIndexArray, a string and tag type
+//slices string inside []
+//slices string inside ()
+//slices string before[]
+//slices string after()
+//constructs the html
+//adds html to file
 function convertWithLinkTag(linkTagIndexArray, tagString, tag) {
     const linkText = tagString.slice(linkTagIndexArray[0][0] + 1, linkTagIndexArray[1][0])
     const link = tagString.slice(linkTagIndexArray[2][0] + 1, linkTagIndexArray[3][0])
@@ -83,6 +98,11 @@ function convertWithLinkTag(linkTagIndexArray, tagString, tag) {
     fs.appendFileSync('index.html', transformedString, { 'flags': 'a+' })
     return transformedString
 }
+
+//Takes in an array
+//turns into string that is input for verifyLinkTag
+//if not link tag, then add to file
+//if link tag then run convertWithLinkTag
 function convertParagraphTag(pTagLinesArray) {
     if (pTagLinesArray.length === 0) {
         return
@@ -99,6 +119,12 @@ function convertParagraphTag(pTagLinesArray) {
         return `<p> ${pTagString} </p>`
     }
 }
+
+//takes in an array
+//removes first index, and turns into string
+//passed to verifyLinkTag
+//if no link tag then remove first index, turn to string and add to file
+//if link tag then call convertWithLinkTag
 
 function converterHeaderTag(inputArray) {
     const firstIndex = ['#', '##', '###', '####', '#####', '######']
@@ -122,6 +148,8 @@ function converterHeaderTag(inputArray) {
     }
     return htmlString
 }
+
+//readline for header, ..., '', everything else
 
 rl.on('line', function (line) {
     let inputString = line.split(' ');
@@ -148,6 +176,7 @@ module.exports = {
     convertWithLinkTag,
     verifyLinkTag
 }
+
 
 
 
